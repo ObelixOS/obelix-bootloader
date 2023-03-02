@@ -1,5 +1,8 @@
 make:
-	nasm src/loader.asm -f bin -o bin/loader.bin
 
+	sh -c "cd src; nasm ./boot_asm.asm -f bin -o ./../bin/boot_asm.bin"
+
+	cp ./bin/boot_asm.bin ./out/boot_asm.bin
 debug:
-	qemu-system-i386 -hda boot.bin
+	${MAKE}
+	qemu-system-x86_64 ./out/boot_asm.bin
